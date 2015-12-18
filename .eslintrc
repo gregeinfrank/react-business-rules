@@ -1,0 +1,22 @@
+{
+  "ecmaFeatures": {
+    "jsx": true
+  },
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "jasmine": true,
+  },
+  "globals": {
+    "React": false,
+    "TestUtils": false,
+  },
+  "rules": {
+    "no-undef": 2,       // error on using undeclared values
+    "no-unused-vars": 1,  // warn on declaring variables and not using them
+  },
+  "plugins": [
+    "react",
+  ],
+}
