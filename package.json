@@ -1,0 +1,38 @@
+{
+  "name": "react-business-rules",
+  "engines": {
+    "node": "^0.12.7",
+    "npm": "^2.12.1"
+  },
+  "scripts": {
+    "postinstall": "gulp build"
+  },
+  "dependencies": {
+    "babel": "^6.3.13",
+    "babel-loader": "^6.2.0",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babelify": "^6.1.2",
+    "bootstrap-sass": "^3.3.5",
+    "browserify": "^10.2.4",
+    "browserify-incremental": "^3.0.1",
+    "glob": "^5.0.10",
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.5.2",
+    "gulp-jasmine-browser": "^0.1.3",
+    "gulp-remove-files": "^0.0.3",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-util": "^3.0.5",
+    "gulp-watch": "^4.2.4",
+    "jasmine-ajax": "^3.1.1",
+    "jquery": "^2.1.4",
+    "react": "^0.13.3",
+    "react-hot-loader": "^1.3.0",
+    "underscore": "^1.8.3",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "webpack": "^1.12.9",
+    "webpack-dev-server": "^1.14.0"
+
+  }
+}
