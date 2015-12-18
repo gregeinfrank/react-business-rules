@@ -12,7 +12,7 @@ var ActionsBuilder = React.createClass({
             return (
               <div key={action.id} style={{display: 'flex'}}>
                 <Action ref={action.id} actionTypes={this.props.actionTypes} action={action} />
-                <Button style={{margin: 10, marginTop: 'auto', marginBottom: 'auto'}} bsStyle="danger" bsSize="xsmall" onClick={this.removeAction.bind(this, action.id)}>remove</Button>
+                <Button style={{margin: 5, marginBottom: 'auto'}} bsStyle="danger" bsSize="xsmall" onClick={this.removeAction.bind(this, action.id)}>remove</Button>
               </div>
             );
           })
