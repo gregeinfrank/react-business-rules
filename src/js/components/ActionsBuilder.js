@@ -1,3 +1,4 @@
+var Button = require('react-bootstrap').Button;
 var Action = require('./Action');
 var Styles = require('../styles/Styles');
 var React = require('react');
@@ -11,12 +12,17 @@ var ActionsBuilder = React.createClass({
             return (
               <div key={action.id} style={{display: 'flex'}}>
                 <Action ref={action.id} actionTypes={this.props.actionTypes} action={action} />
-                <span style={Styles.removeButton} className="remove-action" onClick={this.removeAction.bind(this, action.id)} >x</span>
+                <Button style={{margin: 10, marginTop: 'auto', marginBottom: 'auto'}} bsStyle="danger" bsSize="xsmall" onClick={this.removeAction.bind(this, action.id)}>remove</Button>
               </div>
             );
           })
         }
-        <button className="add-action btn btn-default" onClick={this.addAction} >Add Action</button>
+        <Button
+          bsSize="xsmall"
+          className="add-action"
+          onClick={this.addAction}>
+          Add Action
+        </Button>
       </div>
     );
   },

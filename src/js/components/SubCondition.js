@@ -13,6 +13,7 @@ var SubCondition = React.createClass({
           <MenuItem active={this.state.logicalOperator === 'all'} onSelect={this.onLogicalOperatorChange} eventKey='all'>all</MenuItem>
           <MenuItem active={this.state.logicalOperator === 'any'} onSelect={this.onLogicalOperatorChange} eventKey='any'>any</MenuItem>
         </DropdownButton>
+        <br/>
         {
           this.state.conditions.map((condition, index) => {
             if ( condition.all !== undefined ) {
@@ -29,12 +30,15 @@ var SubCondition = React.createClass({
             }
           })
         }
+        <br/>
         <Button
+          bsSize="xsmall"
           className="add-condition"
           onClick={this.addCondition}>
           Add Condition
         </Button>
         <Button
+          bsSize="xsmall"
           className="add-sub-condition"
           onClick={this.addSubCondition}>
           Add Sub Condition

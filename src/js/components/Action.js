@@ -39,7 +39,11 @@ var Action = React.createClass({
     }
     return Object.keys(paramsTypes).map((paramName) => {
       if ( paramsTypes[paramName] === 'numeric' || paramsTypes[paramName] === 'text' ) {
-        return <Input style={{width: 172}} type="text" value={this.state.params[paramName]} onChange={that.onParamChange.bind(that, paramName)} addonBefore={paramName} />
+        return (
+          <div style={{display: 'flex'}}>
+            <Input label={paramName} style={{width: 300}} type="text" value={this.state.params[paramName]} onChange={that.onParamChange.bind(that, paramName)} />
+          </div>
+        );
       }
     });
   },

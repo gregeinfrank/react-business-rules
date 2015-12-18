@@ -64,8 +64,9 @@ var action = {
 }
 
 var conditionsData = {"all":[{"name":"expiration_days","operator":"equal_to","value":4},{"name":"goes_well_with","operator":"contains","value":"Cookies"},{"any":[{"name":"current_month","operator":"equal_to","value":"February"},{"name":"expiration_days","operator":"equal_to","value":2}]}]};
+conditionsData = {};
 
 //React.render(<Condition condition={condition} variables={variables} variable_type_operators={variable_type_operators} />, document.getElementById('example'));
 //React.render(<ConditionsBuilder variables={variables} variable_type_operators={variable_type_operators} conditionsData={conditionsData} />, document.getElementById('example-conditions'));
 //React.render(<ActionsBuilder actionTypes={actionTypes} actions={[action]} />, document.getElementById('example-actions'));
-React.render(<BusinessRules actionTypes={actionTypes} actions={[action]} variables={variables} variable_type_operators={variable_type_operators} conditionsData={conditionsData} />, document.getElementById('example'));
+React.render(<BusinessRules actionTypes={actionTypes} actions={[]} variables={variables} variable_type_operators={variable_type_operators} conditionsData={conditionsData} />, document.getElementById('example'));
