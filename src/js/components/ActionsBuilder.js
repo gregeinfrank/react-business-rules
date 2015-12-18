@@ -16,7 +16,7 @@ var ActionsBuilder = React.createClass({
             );
           })
         }
-        <button className="add-action" onClick={this.addAction} >Add Action</button>
+        <button className="add-action btn btn-default" onClick={this.addAction} >Add Action</button>
       </div>
     );
   },

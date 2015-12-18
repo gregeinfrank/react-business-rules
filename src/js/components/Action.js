@@ -1,3 +1,6 @@
+var DropdownButton = require('react-bootstrap').DropdownButton;
+var MenuItem = require('react-bootstrap').MenuItem;
+var Input = require('react-bootstrap').Input;
 var React = require('react');
 var Styles = require('../styles/Styles');
 
@@ -6,7 +9,7 @@ var Action = React.createClass({
     let actionChooser = this.getActionChooser();
     let paramsChoosers = this.getParamsChoosers();
     return (
-      <div className="action-row">
+      <div className="action-row" style={{display: 'flex'}}>
         { actionChooser }
         { paramsChoosers }
       </div>
@@ -14,14 +17,17 @@ var Action = React.createClass({
   },
 
   getActionChooser: function () {
+    let menuItems = [], title = '';
+    this.props.actionTypes.forEach((action) => {
+      menuItems.push(<MenuItem active={this.state.name === action.name} key={action.name} onSelect={this.onActionChange} eventKey={action.name} >{action.label}</MenuItem>);
+      if ( action.name === this.state.name ) {
+        title = action.label;
+      }
+    });
     return (
-      <select style={Styles.select} value={this.state.name} onChange={this.onActionChange} className="action-name">
-        {
-          this.props.actionTypes.map((action) => {
-            return <option key={action.name} value={action.name}>{action.label}</option>;
-          })
-        }
-      </select>
+      <DropdownButton title={title}>
+        { menuItems }
+      </DropdownButton>
     );
   },
 
@@ -33,14 +39,13 @@ var Action = React.createClass({
     }
     return Object.keys(paramsTypes).map((paramName) => {
       if ( paramsTypes[paramName] === 'numeric' || paramsTypes[paramName] === 'text' ) {
-        return <label>{paramName}: <input style={Styles.input} value={this.state.params[paramName]} onChange={that.onParamChange.bind(that, paramName)}/></label>;
+        return <Input style={{width: 172}} type="text" value={this.state.params[paramName]} onChange={that.onParamChange.bind(that, paramName)} addonBefore={paramName} />
       }
     });
   },
 
-  onActionChange: function (e) {
+  onActionChange: function (e, name) {
     e.preventDefault();
-    let name = e.target.value;
     this.setState({ name });
   },
 

@@ -5,10 +5,12 @@ var React = require('react');
 var BusinessRules = React.createClass({
   render: function () {
     return (
-      <div className="business-rules">
+      <div style={{padding: 40}} className="business-rules">
+        <h2>When these conditions are met...</h2>
         <ConditionsBuilder ref="conditionsBuilder" conditionsData={this.props.conditionsData} variables={this.props.variables} variable_type_operators={this.props.variable_type_operators} />
+        <h2>Run these actions:</h2>
         <ActionsBuilder ref="actionsBuilder" actions={this.props.actions} actionTypes={this.props.actionTypes} />
-        <button onClick={this.fakeSubmit}>Fake Submit (print to console)</button>
+        <button className="btn btn-default" style={{marginTop: 30}} onClick={this.fakeSubmit}>Fake Submit (print to console)</button>
       </div>
     );
   },

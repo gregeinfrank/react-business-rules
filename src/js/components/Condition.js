@@ -1,3 +1,6 @@
+var DropdownButton = require('react-bootstrap').DropdownButton;
+var MenuItem = require('react-bootstrap').MenuItem;
+var Input = require('react-bootstrap').Input;
 var React = require('react');
 var Styles = require('../styles/Styles');
 
@@ -7,7 +10,7 @@ var Condition = React.createClass({
     let operatorChooser = this.getOperatorChooser();
     let valueChooser = this.getValueChooser();
     return (
-      <div className="condition-row">
+      <div className="condition-row" style={{display: 'flex'}}>
         { variableChooser }
         { operatorChooser }
         { valueChooser }
@@ -16,31 +19,35 @@ var Condition = React.createClass({
   },
 
   getVariableChooser: function () {
+    let menuItems = [], title = '';
+    this.props.variables.map((variable) => {
+      menuItems.push(<MenuItem active={this.state.name === variable.name} onSelect={this.onVariableChange} eventKey={variable.name}>{variable.label}</MenuItem>);
+      if ( variable.name === this.state.name ) {
+        title = variable.label
+      }
+    });
     return (
-      <select style={Styles.select} value={this.state.name} onChange={this.onVariableChange} className="condition-name">
-        {
-          this.props.variables.map((variable) => {
-            return <option key={variable.name} value={variable.name}>{variable.label}</option>;
-          })
-        }
-      </select>
+      <DropdownButton title={title}>
+        { menuItems }
+      </DropdownButton>
     );
   },
 
   getOperatorChooser: function () {
-    let operatorsList = [];
+    let menuItems = [], title = '';
     if ( this.state.name ) {
       let variableType = this.getVariabletypeFromName(this.state.name);
-      operatorsList = this.props.variable_type_operators[variableType] || [];
+      menuItems = (this.props.variable_type_operators[variableType] || []).map((operator) => {
+        if ( operator.name === this.state.operator ) {
+          title = operator.label;
+        }
+        return <MenuItem active={this.state.operator === operator.name} onSelect={this.onOperatorChange} eventKey={operator.name}>{operator.label}</MenuItem>;
+      });
     }
     return (
-      <select style={Styles.select} value={this.state.operator} onChange={this.onOperatorChange} className="condition-operator">
-        {
-          operatorsList.map((operator) => {
-            return <option key={operator.name} value={operator.name}>{operator.label}</option>;
-          })
-        }
-      </select>
+      <DropdownButton title={title}>
+        { menuItems }
+      </DropdownButton>
     );
   },
 
@@ -57,16 +64,17 @@ var Condition = React.createClass({
       if ( inputType === 'select' ) {
         let options = this.getVariableOptionsFromName(this.state.name);
         valueChooser = (
-          <select style={Styles.select} value={this.state.value} className="condition-value" onChange={this.onValueChange}>
+          <DropdownButton title={this.state.value}>
             {
               options.map((option) => {
-                return <option key={option}>{option}</option>;
+                return <MenuItem onSelect={this.onValueChange} active={this.state.value === option} eventKey={option}>{option}</MenuItem>;
               })
             }
-          </select>
+          </DropdownButton>
         );
       } else if ( inputType === 'numeric' || inputType === 'text' ) {
         valueChooser = <input style={Styles.input} value={this.state.value} className="condition-value" onChange={this.onValueChange}/>;
+        valueChooser = <Input type="text" value={this.state.value} className="condition-value" onChange={this.onValueChange}/>;
       }
     }
     return valueChooser;
@@ -92,22 +100,22 @@ var Condition = React.createClass({
     return options;
   },
 
-  onVariableChange: function (e) {
+  onVariableChange: function (e, name) {
     e.preventDefault();
-    let name = e.target.value;
     let variableType = this.getVariabletypeFromName(name);
     let operator = this.props.variable_type_operators[variableType] && this.props.variable_type_operators[variableType][0].name;
     this.setState({ name, operator });
   },
 
-  onOperatorChange: function (e) {
+  onOperatorChange: function (e, operator) {
     e.preventDefault();
-    this.setState({operator: e.target.value});
+    this.setState({operator});
   },
 
-  onValueChange: function (e) {
+  onValueChange: function (e, value) {
     e.preventDefault();
-    this.setState({value: e.target.value});
+    value = value || e.target.value;
+    this.setState({value});
   },
 
   getInitialState: function () {

@@ -1,3 +1,6 @@
+var DropdownButton = require('react-bootstrap').DropdownButton;
+var MenuItem = require('react-bootstrap').MenuItem;
+var Button = require('react-bootstrap').Button;
 var Condition = require('./Condition');
 var Styles = require('../styles/Styles');
 var React = require('react');
@@ -6,10 +9,10 @@ var SubCondition = React.createClass({
   render: function () {
     return (
       <div style={Styles.subCondition} className="conditions-builder">
-        <select style={Styles.select} value={this.state.logicalOperator} onChange={this.onLogicalOperatorChange} className="sub-condition-logical-operator">
-          <option value="all">All</option>
-          <option value="any">Any</option>
-        </select>
+        <DropdownButton style={{marginBottom: 10}} title={this.state.logicalOperator}>
+          <MenuItem active={this.state.logicalOperator === 'all'} onSelect={this.onLogicalOperatorChange} eventKey='all'>all</MenuItem>
+          <MenuItem active={this.state.logicalOperator === 'any'} onSelect={this.onLogicalOperatorChange} eventKey='any'>any</MenuItem>
+        </DropdownButton>
         {
           this.state.conditions.map((condition, index) => {
             if ( condition.all !== undefined ) {
@@ -20,14 +23,22 @@ var SubCondition = React.createClass({
               return (
                 <div key={condition.id} style={{display: 'flex'}}>
                   <Condition ref={condition.id} variables={this.props.variables} variable_type_operators={this.props.variable_type_operators} condition={condition} />
-                  <span style={Styles.removeButton} className="remove-condition" onClick={this.removeCondition.bind(this, condition.id)} >x</span>
+                  <Button style={{margin: 10, marginBottom: 'auto'}} bsStyle="danger" bsSize="xsmall" onClick={this.removeCondition.bind(this, condition.id)}>remove</Button>
                 </div>
               );
             }
           })
         }
-        <button className="add-condition" onClick={this.addCondition} >Add Condition</button>
-        <button className="add-sub-condition" onClick={this.addSubCondition} >Add Sub Condition</button>
+        <Button
+          className="add-condition"
+          onClick={this.addCondition}>
+          Add Condition
+        </Button>
+        <Button
+          className="add-sub-condition"
+          onClick={this.addSubCondition}>
+          Add Sub Condition
+        </Button>
       </div>
     );
   },
@@ -54,9 +65,9 @@ var SubCondition = React.createClass({
     this.setState({ conditions, id: this.state.id + 1 });
   },
 
-  onLogicalOperatorChange: function (e) {
+  onLogicalOperatorChange: function (e, logicalOperator) {
     e.preventDefault();
-    this.setState({logicalOperator: e.target.value});
+    this.setState({logicalOperator});
   },
 
   removeCondition: function (id) {
