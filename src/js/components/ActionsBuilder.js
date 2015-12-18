@@ -1,4 +1,5 @@
 var Action = require('./Action');
+var Styles = require('../styles/Styles');
 var React = require('react');
 
 var ActionsBuilder = React.createClass({
@@ -10,7 +11,7 @@ var ActionsBuilder = React.createClass({
             return (
               <div key={action.id} style={{display: 'flex'}}>
                 <Action ref={action.id} actionTypes={this.props.actionTypes} action={action} />
-                <button className="remove-action" onClick={this.removeAction.bind(this, action.id)} >Remove Action</button>
+                <span style={Styles.removeButton} className="remove-action" onClick={this.removeAction.bind(this, action.id)} >x</span>
               </div>
             );
           })
@@ -46,6 +47,12 @@ var ActionsBuilder = React.createClass({
       actionTypes: [],
       actions: [],
     };
+  },
+
+  getData: function () {
+    return Object.keys(this.refs).map((ref) => {
+      return this.refs[ref].getData();
+    });
   },
 });
 

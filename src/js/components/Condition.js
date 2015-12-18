@@ -66,7 +66,7 @@ var Condition = React.createClass({
           </select>
         );
       } else if ( inputType === 'numeric' || inputType === 'text' ) {
-        valueChooser = <input value={this.state.value} className="condition-value" onChange={this.onValueChange}/>;
+        valueChooser = <input style={Styles.input} value={this.state.value} className="condition-value" onChange={this.onValueChange}/>;
       }
     }
     return valueChooser;
@@ -121,6 +121,10 @@ var Condition = React.createClass({
 
   getDefaultProps: function () {
     return {condition: {}};
+  },
+
+  getData: function () {
+    return this.state;
   },
 
 });

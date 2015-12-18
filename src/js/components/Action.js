@@ -33,7 +33,7 @@ var Action = React.createClass({
     }
     return Object.keys(paramsTypes).map((paramName) => {
       if ( paramsTypes[paramName] === 'numeric' || paramsTypes[paramName] === 'text' ) {
-        return <label>{paramName}: <input value={this.state.params[paramName]} onChange={that.onParamChange.bind(that, paramName)}/></label>;
+        return <label>{paramName}: <input style={Styles.input} value={this.state.params[paramName]} onChange={that.onParamChange.bind(that, paramName)}/></label>;
       }
     });
   },
@@ -71,6 +71,10 @@ var Action = React.createClass({
       name: action.name,
       params: action.params,
     };
+  },
+
+  getData: function () {
+    return this.state;
   },
 });
 
