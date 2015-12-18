@@ -1,4 +1,5 @@
 var React = require('react');
+var Styles = require('../styles/Styles');
 
 var Condition = React.createClass({
   render: function () {
@@ -16,7 +17,7 @@ var Condition = React.createClass({
 
   getVariableChooser: function () {
     return (
-      <select value={this.state.name} onChange={this.onVariableChange} className="condition-name">
+      <select style={Styles.select} value={this.state.name} onChange={this.onVariableChange} className="condition-name">
         {
           this.props.variables.map((variable) => {
             return <option key={variable.name} value={variable.name}>{variable.label}</option>;
@@ -33,7 +34,7 @@ var Condition = React.createClass({
       operatorsList = this.props.variable_type_operators[variableType] || [];
     }
     return (
-      <select value={this.state.operator} onChange={this.onOperatorChange} className="condition-operator">
+      <select style={Styles.select} value={this.state.operator} onChange={this.onOperatorChange} className="condition-operator">
         {
           operatorsList.map((operator) => {
             return <option key={operator.name} value={operator.name}>{operator.label}</option>;
@@ -56,7 +57,7 @@ var Condition = React.createClass({
       if ( inputType === 'select' ) {
         let options = this.getVariableOptionsFromName(this.state.name);
         valueChooser = (
-          <select value={this.state.value} className="condition-value" onChange={this.onValueChange}>
+          <select style={Styles.select} value={this.state.value} className="condition-value" onChange={this.onValueChange}>
             {
               options.map((option) => {
                 return <option key={option}>{option}</option>;

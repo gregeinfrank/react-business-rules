@@ -1,4 +1,5 @@
-var Condition = require('./components/Condition');
+var ActionsBuilder = require('./components/ActionsBuilder');
+var ConditionsBuilder = require('./components/ConditionsBuilder');
 
 var React = require('react');
 var variables = [
@@ -14,6 +15,15 @@ var variables = [
     "label": "Goes Well With",
     "field_type": "select",
     "options": ["Eggnog", "Cookies", "Beef Jerkey"]}
+];
+
+var actionTypes = [
+  { "name": "put_on_sale",
+    "label": "Put On Sale",
+    "params": {"sale_percentage": "numeric"}},
+  { "name": "order_more",
+    "label": "Order More",
+    "params": {"number_to_order": "numeric"}}
 ];
 
 var variable_type_operators = {
@@ -41,9 +51,17 @@ var variable_type_operators = {
 };
 
 var condition = {
-  //name: 'goes_well_with',
-  //operator: 'does_not_contain',
-  //value: 'Cookies',
+  name: 'goes_well_with',
+  operator: 'does_not_contain',
+  value: 'Cookies',
 };
+var action = {
+  name: 'order_more',
+  params: {
+    number_to_order: '5'
+  }
+}
 
-React.render(<Condition condition={condition} variables={variables} variable_type_operators={variable_type_operators} />, document.getElementById('example'));
+//React.render(<Condition condition={condition} variables={variables} variable_type_operators={variable_type_operators} />, document.getElementById('example'));
+React.render(<ConditionsBuilder variables={variables} variable_type_operators={variable_type_operators} conditions={[condition]} />, document.getElementById('example-conditions'));
+React.render(<ActionsBuilder actionTypes={actionTypes} actions={[action]} />, document.getElementById('example-actions'));
