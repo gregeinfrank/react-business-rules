@@ -62,7 +62,10 @@ var Action = React.createClass({
   },
 
   getDefaultProps: function () {
-    return {action: {}};
+    return {
+      action: {},
+      actionTypes: [],
+    };
   },
 
   getParamsTypesFromName: function (name) {
